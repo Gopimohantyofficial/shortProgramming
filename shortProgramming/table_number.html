@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+   <h2>Multiplication Table Generator</h2>
+    <input type="number" id="number" placeholder="Enter a number">
+    <button id="check">Get</button>
+    <p id="res"></p>
+
+
+    <script>
+
+        let check = document.getElementById('check');
+        let res = document.getElementById('res');
+        function table() {
+            let number = parseInt(document.getElementById('number').value, 10);
+            let ans = "";
+
+            for (let i = 1; i <= 10; i++) {
+            
+
+              ans = ans+`${number}*${i}=${number*i}<br>`;
+            }
+             res.innerHTML = ans;
+        }
+        check.addEventListener('click', table);
+    </script>
+</body>
+
+</html>
