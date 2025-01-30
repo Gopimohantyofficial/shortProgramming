@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2> Convert First letter to String into Uppercase  </h2>
+    <input type="text" name="" id="str">
+    <button id="check">Convert</button>
+    <p id="res"></p>
+    
+    <script>
+        let check=document.getElementById('check');
+        let res=document.getElementById('res');
+         
+        function convertUppercase(){
+
+            let str=document.getElementById('str').value;
+            let upperCase = str.charAt(0).toUpperCase() + str.slice(1);
+            res.innerText = `${upperCase}`;
+        }
+        check.addEventListener('click',convertUppercase);
+    </script>
+</body>
+</html>

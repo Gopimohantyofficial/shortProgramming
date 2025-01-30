@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>No of Repeat Characters repeated</h2>
+    <input type="text" id="str" placeholder="Enter the string">
+    <input type="text" id="chr" placeholder="enter the character">
+    <button id="check">Check</button>
+    <p id="res"></p>
+
+    <script>
+        let check=document.getElementById('check');
+        let res=document.getElementById('res');
+
+
+        function repeatCharacter(){
+            let str=document.getElementById('str').value;
+            let chr=document.getElementById('chr').value;
+            let len=str.length;
+            let count=0;
+
+            for(let i=0;i<len;i++){
+                 if(str[i]===chr)  {
+                    count++;
+                 }
+            }
+            res.innerText=`The no of occurance of ${chr} is ${count}`;
+
+        }
+        check.addEventListener('click',repeatCharacter);
+    </script>
+</body>
+</html>

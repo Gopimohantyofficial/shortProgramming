@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Sum of Natural numbers</h2>
+    <input type="number" name="" id="number">
+    <button id="get">get</button>
+    <p id="res"></p>
+
+    <script>
+        let res=document.getElementById('res');
+        function sum(){
+            let number=parseInt(document.getElementById('number').value,10);
+            let sum=0;
+            for(let i=0;i<=number;i++){
+                sum=sum+i;
+            }
+        res.innerText=`sum is ${sum}`;
+        }
+       document.getElementById('get').addEventListener('click',sum);
+    </script>
+    
+</body>
+</html>

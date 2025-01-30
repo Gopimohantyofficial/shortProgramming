@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Count Vowel Characters</h2>
+    <input type="text" name="" id="str" placeholder="enter the String">
+    <button id="check">check</button>
+   <p id="res"></p>
+
+
+   <script>
+ 
+    let check=document.getElementById('check');
+    let res=document.getElementById('res');
+
+    
+
+    function countVowels() {
+    let str = document.getElementById('str').value;
+    let count = 0;
+    let reg = /[aeiou]/gi;
+    const matches = str.match(reg);
+    count = matches ? matches.length : 0;
+
+    res.innerText = `Number of vowels: ${count}`;
+}
+
+
+   check.addEventListener('click',countVowels);
+
+
+   </script>
+    
+</body>
+</html>

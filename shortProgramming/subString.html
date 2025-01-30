@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Check String contains SubString or not</h2>
+    <input type="text" name="" id="str" placeholder="ENter the String">
+    <input type="text" name="" id="substr" placeholder="ENter the Sub-String">
+    <button id="check">Check</button>
+    <p id="res"></p>
+
+
+
+    <script>
+
+        let check=document.getElementById('check');
+        let res=document.getElementById('res');
+       
+         function substringcheck(){
+            let str=document.getElementById('str').value;
+            let substr=document.getElementById('substr').value;
+
+            if(str.includes(substr)){
+                res.innerHTML=`Sub-string  "${substr}" is present in the String and at  the position is ${str.indexOf(substr)}`;
+            }else{
+                 res.innerHTML=`Sub-string "${substr}" is not present String`;
+            }
+
+
+
+        }
+        check.addEventListener('click',substringcheck);
+    </script>
+
+</body>
+</html>

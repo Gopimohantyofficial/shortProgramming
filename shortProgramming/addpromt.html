@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced To-Do App</title>
+  <style>
+    :root {
+      --bg-color: #f9f9f9;
+      --text-color: #333333;
+      --card-bg: #ffffff;
+      --button-bg: #4caf50;
+      --button-hover-bg: #45a049;
+      --input-bg: #ffffff;
+      --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #181818;
+      --text-color: #ffffff;
+      --card-bg: #242424;
+      --button-bg: #007bff;
+      --button-hover-bg: #0056b3;
+      --input-bg: #333333;
+      --shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    #app-container {
+      width: 100%;
+      max-width: 800px;
+      background-color: var(--card-bg);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+    }
+
+    h1 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      gap: 10px;
+    }
+
+    #theme-icon {
+      cursor: pointer;
+      font-size: 1.5rem;
+      transition: color 0.3s;
+    }
+
+    #controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    input, select, button {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid var(--text-color);
+      background-color: var(--input-bg);
+      color: var(--text-color);
+      font-size: 16px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    input {
+      flex: 2;
+    }
+
+    select {
+      flex: 1;
+    }
+
+    button {
+      cursor: pointer;
+      background-color: var(--button-bg);
+      color: white;
+      border: none;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: var(--button-hover-bg);
+    }
+
+    #export-import-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .export-button, .import-button {
+      width: 48%;
+      font-size: 16px;
+    }
+
+    #search-bar {
+      width: 100%;
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid var(--text-color);
+      background-color: var(--input-bg);
+      color: var(--text-color);
+    }
+
+    #item-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    .list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid var(--text-color);
+      border-radius: 5px;
+      background-color: var(--input-bg);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .list-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .list-item .actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .edit-btn, .delete-btn {
+      padding: 5px 10px;
+      font-size: 14px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .edit-btn {
+      background-color: #ffc107;
+      color: #333;
+    }
+
+    .edit-btn:hover {
+      background-color: #e0a800;
+    }
+
+    .delete-btn {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .delete-btn:hover {
+      background-color: #c82333;
+    }
+
+    .priority {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .priority.high {
+      color: red;
+    }
+
+    .priority.medium {
+      color: orange;
+    }
+
+    .priority.low {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div id="app-container">
+    <h1>
+      <span>Advanced To-Do App</span>
+      <span id="theme-icon">🌙</span>
+    </h1>
+    <div id="controls">
+      <input type="text" id="task-input" placeholder="Enter a new task">
+      <select id="category-selector">
+        <option value="work">Work</option>
+        <option value="personal">Personal</option>
+        <option value="misc">Miscellaneous</option>
+      </select>
+      <select id="priority-selector">
+        <option value="low">Low Priority</option>
+        <option value="medium">Medium Priority</option>
+        <option value="high">High Priority</option>
+      </select>
+      <input type="date" id="deadline-input">
+      <button id="add-item-button">Add Task</button>
+    </div>
+    <input type="text" id="search-bar" placeholder="Search tasks...">
+    <ul id="item-list"></ul>
+    <div id="export-import-container">
+      <button class="export-button" id="export-button">Export</button>
+      <button class="import-button" id="import-button">Import</button>
+    </div>
+    <input type="file" id="file-input" style="display: none;">
+    <button id="clear-completed-button" style="margin-top: 20px; width: 100%;">Clear Completed</button>
+  </div>
+
+  <script>
+   const themeToggle = document.getElementById("theme-toggle");
+    const addItemButton = document.getElementById("add-item-button");
+    const taskInput = document.getElementById("task-input");
+    const categorySelector = document.getElementById("category-selector");
+    const itemList = document.getElementById("item-list");
+    const exportButton = document.getElementById("export-button");
+    const importButton = document.getElementById("import-button");
+    const fileInput = document.getElementById("file-input");
+
+    // Load Theme Preference
+    const savedTheme = localStorage.getItem("theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    themeToggle.textContent = savedTheme === "dark" ? "☀️" : "🌙";
+
+    themeToggle.addEventListener("click", () => {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", newTheme);
+      themeToggle.textContent = newTheme === "dark" ? "☀️" : "🌙";
+      localStorage.setItem("theme", newTheme);
+    });
+
+    const loadTasks = () => {
+      const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      tasks.forEach(task => addTaskToDOM(task.text, task.category));
+    };
+
+    const saveTasks = () => {
+      const tasks = [];
+      document.querySelectorAll(".list-item").forEach(item => {
+        tasks.push({
+          text: item.querySelector(".text").textContent,
+          category: item.dataset.category,
+        });
+      });
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    };
+
+    const addTaskToDOM = (text, category) => {
+      const listItem = document.createElement("li");
+      listItem.classList.add("list-item");
+      listItem.dataset.category = category;
+      listItem.innerHTML = `
+        <span class="text">${text}</span>
+        <div class="actions">
+          <button class="edit-btn">Edit</button>
+          <button class="delete-btn">Delete</button>
+        </div>
+      `;
+      itemList.appendChild(listItem);
+
+      // Edit functionality
+      listItem.querySelector(".edit-btn").addEventListener("click", () => {
+        const newText = prompt("Edit task:", text);
+        if (newText) {
+          listItem.querySelector(".text").textContent = newText;
+          saveTasks();
+        }
+      });
+
+      // Delete functionality
+      listItem.querySelector(".delete-btn").addEventListener("click", () => {
+        listItem.remove();
+        saveTasks();
+      });
+
+      saveTasks();
+    };
+
+    addItemButton.addEventListener("click", () => {
+      const text = taskInput.value.trim();
+      const category = categorySelector.value;
+      if (text) {
+        addTaskToDOM(text, category);
+        taskInput.value = "";
+      }
+    });
+
+    exportButton.addEventListener("click", () => {
+      const tasks = localStorage.getItem("tasks") || "[]";
+      const blob = new Blob([tasks], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "tasks.json";
+      a.click();
+    });
+
+    importButton.addEventListener("click", () => fileInput.click());
+
+    fileInput.addEventListener("change", e => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const tasks = JSON.parse(reader.result);
+          localStorage.setItem("tasks", JSON.stringify(tasks));
+          itemList.innerHTML = "";
+          loadTasks();
+        };
+        reader.readAsText(file);
+      }
+    });
+
+    // Load tasks on page load
+    loadTasks();
+   // JavaScript to implement all features will go here (drag-and-drop, priority color, search, etc.)
+  </script>
+</body>
+</html>

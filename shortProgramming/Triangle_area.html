@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <P id="p">Any Area of a triangle</P>
+
+
+    <script>
+       
+        // let h=prompt("enter the height of the triangle");
+        // let b=prompt("enter the base of the triangle");
+        // let area= (b*h)/2;
+        // console.log(area);    
+      
+    var  a=prompt("enter the side of the triangle");
+var  b=prompt("enter the side of the triangle");
+    var  c=prompt("enter the side of the triangle");
+        //  let a=10;
+        //  let b=10;
+        //  let c=10;
+
+        var a= parseInt(a);
+        var b= parseInt(b);
+        var c= parseInt(c);
+        let s= (a+b+c)/2;
+        console.log(s);
+
+        let sub=s*(s-a)*(s-b)*(s-c);
+
+ console.log(sub);
+        let Area=Math.sqrt(sub);
+        console.log(Area);
+
+
+
+
+    </script>
+    
+</body>
+</html>
