@@ -16,12 +16,12 @@
             const str = document.getElementById('str').value;
             const frequency = {};
 
-            // Count character occurrences using for...of loop
+
             for (const char of str) {
                 frequency[char] = (frequency[char] || 0) + 1;
             }
 
-            // Display results in a formatted way
+  
             let result = "";
             for (const char in frequency) {
                 result += `"${char}" occurs ${frequency[char]} times\n`;
