@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Frequency Counter</title>
+</head>
+<body>
+    <h2>Character Frequency Counter</h2>
+    <input type="text" id="str" placeholder="Enter your text">
+    <button id="check">Check Frequency</button>
+    <pre id="res"></pre>
+
+    <script>
+        document.getElementById('check').addEventListener('click', () => {
+            const str = document.getElementById('str').value;
+            const frequency = {};
+
+            // Count character occurrences using for...of loop
+            for (const char of str) {
+                frequency[char] = (frequency[char] || 0) + 1;
+            }
+
+            // Display results in a formatted way
+            let result = "";
+            for (const char in frequency) {
+                result += `"${char}" occurs ${frequency[char]} times\n`;
+            }
+
+            document.getElementById('res').innerText = result;
+        });
+    </script>
+</body>
+</html>
