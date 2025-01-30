@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Palindrome Check</h2>
+    <input type="text" id="str">
+    <button id="check">Check</button>
+    <p id="res"></p>
+
+
+    <script> 
+      let check=document.getElementById('check');
+      let res=document.getElementById('res');
+
+
+    function palindrome(){
+        let str=document.getElementById('str').value;
+        console.log(str);
+        
+        let temp=str;
+        // strArray=str.split("");
+        // console.log(strArray);
+
+        // strArrayrev=strArray.reverse();
+        // console.log(strArrayrev);
+
+        // revStr= strArrayrev.join('');
+        // console.log(revStr); 
+        temp=temp.split('').reverse().join('');
+
+        if(temp ===str){
+            res.innerText= "It is a Palindrome";
+        }else{
+            res.innerText= "It is Not a Palindrome";
+        }
+
+    }
+   check.addEventListener('click',palindrome);
+
+         /*with loop   */
+         let str="abba"
+        let len=str.length;
+        for(let i=0;i<=len/2;i++){
+            if(str[i]!=str[len-1-i]){
+                console.log("it is not a Palindrome");
+
+            }else{
+         console.log('it is a Palindrome');
+         
+            }
+        }
+
+
+
+    </script>
+</body>
+</html>
