@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Armstrong Number</h2>
+    <input type="number" name="" id="number">
+    <button id="check">check</button>
+    <p id="res"></p>
+
+
+    <script>
+
+        let check = document.getElementById('check');
+        let res = document.getElementById('res');
+
+        function Armstrong() {
+            let number = parseInt(document.getElementById('number').value, 10);
+            let temp = number;
+            let sum = 0;
+            while (temp > 0) {
+                rem = temp%10;
+                sum = sum + rem ** 3;
+                temp = Math.floor(temp/10);
+            }
+          if(sum === number){
+            res.innerHTML=`${number}is a Armstrong Number`;
+          }else{
+            res.innerHTML=`${number}is not a Armstrong Number`;
+
+          }
+
+        }
+        check.addEventListener('click', Armstrong);
+
+
+
+    </script>
+
+</body>
+
+</html>
