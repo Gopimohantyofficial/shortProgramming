@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Factorial Of a number</h2>
+    <input type="number" id="number"placeholder="Enter ther number"> 
+    <button id="check" >submit</button>
+    <p id="res"> </p> 
+
+    <script>
+
+         let check=document.getElementById('check');
+    function Factorial(){
+    const num = parseInt(document.getElementById('number').value, 10);
+
+        let res=document.getElementById('res');
+
+    
+        let fact=1;
+        for(let i =1;i<=num;i++){
+         fact= fact*i;
+  
+        }
+    res.textContent = `Factorial of ${num} is ${fact}.`;
+        }
+
+       check.addEventListener('click',Factorial);
+     
+    </script>
+</body>
+</html>      
